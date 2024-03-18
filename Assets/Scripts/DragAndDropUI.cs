@@ -11,12 +11,21 @@ public class DragAndDropUI : MonoBehaviour
 
     private void Awake()
     {
+        isCanPlace = false;
         _rectTransform = GetComponent<RectTransform>();
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.GetComponent<Void>())
+        {
+            _currentDropZone = null;
+            _prevDropZone = null;
+            isCanPlace = false;
+            return;
+        }
+
         if (other.gameObject.GetComponent<DropZone>() != null)
         {
             isCanPlace = true;
@@ -53,5 +62,14 @@ public class DragAndDropUI : MonoBehaviour
             transform.SetParent(_currentDropZone.transform);
             _rectTransform.anchoredPosition = Vector2.zero;
         }
+    }
+
+    public bool CheckPlacement()
+    {
+        if (_currentDropZone != null && _currentDropZone.IsFree())
+        {
+            return isCanPlace;
+        }
+        return false;
     }
 }

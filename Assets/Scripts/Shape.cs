@@ -7,6 +7,7 @@ public class Shape : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 {
     private RectTransform _rectTransform;
     private Vector2 _startPosition;
+    private bool canPlace;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class Shape : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        canPlace = true;
         _startPosition = _rectTransform.anchoredPosition;
     }
 
@@ -28,7 +30,16 @@ public class Shape : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         int childcount = transform.childCount;
         for (int i = 0; i < childcount; i++)
         {
-            transform.GetChild(0).GetComponent<DragAndDropUI>().Place();
+            if (!transform.GetChild(i).GetComponent<DragAndDropUI>().CheckPlacement())
+            {                
+                _rectTransform.anchoredPosition = _startPosition;
+                canPlace = false;
+            }
         }
+        if(canPlace)
+            for (int i = 0; i < childcount; i++)
+            {                
+                transform.GetChild(0).GetComponent<DragAndDropUI>().Place();
+            }
     }
 }

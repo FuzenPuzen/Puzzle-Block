@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class DropZone : MonoBehaviour
 {
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<DragAndDropUI>() != null)
@@ -30,5 +31,11 @@ public class DropZone : MonoBehaviour
     public void Recolor(Color color)
     {
         transform.GetComponent<Image>().color = color;
+    }
+
+    public bool IsFree()
+    {
+        if (transform.childCount > 0) return false;
+        return true;
     }
 }
