@@ -8,16 +8,9 @@ public class #SCRIPTNAME# : MonoBehaviour
 #NOTRIM#
 public class #SCRIPTNAME#Service : IService
 {
-	private IViewFabric _viewFabric;
+	[Inject] private IViewFabric _viewFabric;
 	private #SCRIPTNAME# _#SCRIPTNAME#;
-    private IMarkerService _markerService;
-	#NOTRIM#
-	[Inject]
-	public void Constructor(IViewFabric fabric, IMarkerService markerService)
-	{
-		_markerService = markerService;
-		_viewFabric = fabric;
-	}
+    [Inject] private IMarkerService _markerService;
 
 	public void ActivateService()
 	{       

@@ -44,7 +44,7 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
 public class ShapeViewService : IService
 {
-    private IViewFabric _fabric;
+    private IViewFabric _viewfabric;
     private ShapeView _shapeView;
     private IMarkerService _markerService;
 
@@ -52,14 +52,13 @@ public class ShapeViewService : IService
     public void Constructor(IViewFabric fabric, IMarkerService markerService)
     {
         _markerService = markerService;
-        _fabric = fabric;
+        _viewfabric = fabric;
     }
 
     public void ActivateService()
     {
-        Debug.Log(_markerService.GetMarker<ShapePlaceMarker>().transform);
         Transform parent = _markerService.GetMarker<ShapePlaceMarker>().transform;
 
-        _shapeView = _fabric.Init<ShapeView>(parent);
+        _shapeView = _viewfabric.Init<ShapeView>(parent);
     }
 }

@@ -3,25 +3,12 @@ using Zenject;
 
 public class SessionManager : MonoBehaviour
 {
-    private ShapeSpawnService _shapeSpawnService;
-    private IServiceFabric _serviceFabric;
-    private IMarkerService _markerService;
-    public GameObject ShapePlace;
+    [Inject] private StateMachine _stateMachine;
 
-    [Inject]
-    public void Constructor(IServiceFabric fabric, IMarkerService markerService)
+
+    void Start()
     {
-        _markerService = markerService;
-        _serviceFabric = fabric;
-    }
-
-
-    void Awake()
-    {     
-        _markerService.ActivateService();
-        ShapePlace.SetActive(true);
-        _shapeSpawnService = _serviceFabric.InitSingle<ShapeSpawnService>();
-        _shapeSpawnService.ActivateService();
+        _stateMachine.SetState<InitState>();
     }
 
 
