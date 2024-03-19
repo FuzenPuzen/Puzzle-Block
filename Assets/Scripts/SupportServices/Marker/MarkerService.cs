@@ -39,6 +39,7 @@ public class Marker: MonoBehaviour, IMarker
 {
     public void Awake()
     {
+        print(this.name);
         EventBus<OnMarkerAwake>.Raise(new() {marker = this});
     }
 }

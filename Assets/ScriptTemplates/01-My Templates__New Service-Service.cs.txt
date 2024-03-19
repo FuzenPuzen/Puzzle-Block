@@ -7,10 +7,12 @@ public interface I#SCRIPTNAME# : IService
 #NOTRIM#
 public class #SCRIPTNAME# : I#SCRIPTNAME#
 {
-	[Inject]
-	public void Constructor()
-	{
+	private IServiceFabric _serviceFabric;
 	#NOTRIM#
+	[Inject]
+	public void Constructor(IServiceFabric fabric)
+	{
+		_serviceFabric = fabric;
 	}
 	#NOTRIM#
 	public void ActivateService()

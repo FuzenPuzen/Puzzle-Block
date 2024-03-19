@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 public interface IServiceFabric
 {
@@ -25,7 +21,7 @@ public class ServiceFabric: IServiceFabric
         // Если экземпляр не найден, то биндим и создаем новый
         if (instance == null)
         {
-            _container.Bind<T>().AsSingle(); // Можно использовать другие типы биндинга в зависимости от вашего случая
+            _container.Bind<T>().AsSingle();
             instance = _container.Resolve<T>();
         }
         return instance;

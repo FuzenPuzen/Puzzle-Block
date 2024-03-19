@@ -1,6 +1,7 @@
 using EventBus;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -38,5 +39,27 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             transform.GetChild(0).GetComponent<PieceView>().Place();
         }
         EventBus<ShapePlaced>.Raise();
+    }
+}
+
+public class ShapeViewService : IService
+{
+    private IViewFabric _fabric;
+    private ShapeView _shapeView;
+    private IMarkerService _markerService;
+
+    [Inject]
+    public void Constructor(IViewFabric fabric, IMarkerService markerService)
+    {
+        _markerService = markerService;
+        _fabric = fabric;
+    }
+
+    public void ActivateService()
+    {
+        Debug.Log(_markerService.GetMarker<ShapePlaceMarker>().transform);
+        Transform parent = _markerService.GetMarker<ShapePlaceMarker>().transform;
+
+        _shapeView = _fabric.Init<ShapeView>(parent);
     }
 }
