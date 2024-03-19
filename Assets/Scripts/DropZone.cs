@@ -6,7 +6,7 @@ public class DropZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<DragAndDropUI>() != null)
+        if (other.gameObject.GetComponent<Piece>() != null)
         {
             Recolor(Color.red);
         }
@@ -14,7 +14,7 @@ public class DropZone : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<DragAndDropUI>() != null)
+        if (other.gameObject.GetComponent<Piece>() != null)
         {
             Recolor(Color.red);
         }
@@ -22,7 +22,7 @@ public class DropZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<DragAndDropUI>() != null)
+        if (other.gameObject.GetComponent<Piece>() != null)
         {
             Recolor(Color.white);
         }
