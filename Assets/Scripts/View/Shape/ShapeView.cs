@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using EventBus;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Shape : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private RectTransform _rectTransform;
     private Vector2 _startPosition;
@@ -28,7 +27,7 @@ public class Shape : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         int childcount = transform.childCount;
         for (int i = 0; i < childcount; i++)
         {
-            if (!transform.GetChild(i).GetComponent<Piece>().CheckPlacement())
+            if (!transform.GetChild(i).GetComponent<PieceView>().CheckPlacement())
             {                
                 _rectTransform.anchoredPosition = _startPosition;
                 return;
@@ -36,7 +35,8 @@ public class Shape : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         }
         for (int i = 0; i < childcount; i++)
         {                
-            transform.GetChild(0).GetComponent<Piece>().Place();
+            transform.GetChild(0).GetComponent<PieceView>().Place();
         }
+        EventBus<ShapePlaced>.Raise();
     }
 }

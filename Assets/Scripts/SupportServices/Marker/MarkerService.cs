@@ -8,7 +8,6 @@ public class  MarkerService : IMarkerService
     private List<IMarker> markers = new List<IMarker>();
 
     private EventBinding<OnMarkerAwake> _onMarkerAwake;
-    private int count;
     public void ActivateService()
     {
         _onMarkerAwake = new(SetMarker);
@@ -19,7 +18,7 @@ public class  MarkerService : IMarkerService
         _onMarkerAwake.Remove(SetMarker);
     }
 
-    public T GetTransformMarker<T>() where T : IMarker
+    public T GetMarker<T>() where T : IMarker
     {
         return markers.OfType<T>().FirstOrDefault();
     }
@@ -32,7 +31,7 @@ public class  MarkerService : IMarkerService
 
 public interface IMarkerService: IService
 {
-    public T GetTransformMarker<T>() where T : IMarker;
+    public T GetMarker<T>() where T : IMarker;
     public void DeActivateService();
 }
 

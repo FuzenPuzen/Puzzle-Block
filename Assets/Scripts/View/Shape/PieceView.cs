@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class Piece : MonoBehaviour
+public class PieceView : MonoBehaviour
 {
     private RectTransform _rectTransform;
-    private DropZone _currentDropZone;
+    private DropZoneView _currentDropZone;
 
     private void Awake()
     {
@@ -15,19 +13,19 @@ public class Piece : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.TryGetComponent<DropZone>(out DropZone dropZone))
+        if (other.gameObject.TryGetComponent<DropZoneView>(out DropZoneView dropZone))
             _currentDropZone = dropZone;
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {      
-        if (other.gameObject.TryGetComponent<DropZone>(out DropZone dropZone))
+        if (other.gameObject.TryGetComponent<DropZoneView>(out DropZoneView dropZone))
             _currentDropZone = dropZone;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.GetComponent<DropZone>() == _currentDropZone)
+        if (other.GetComponent<DropZoneView>() == _currentDropZone)
             ClearDropZone();
     }
 

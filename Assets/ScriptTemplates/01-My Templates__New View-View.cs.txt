@@ -8,7 +8,7 @@ public class #SCRIPTNAME# : MonoBehaviour
 #NOTRIM#
 public class #SCRIPTNAME#Service : IService
 {
-	private IViewFabric _fabric;
+	private IViewFabric _viewFabric;
 	private #SCRIPTNAME# _#SCRIPTNAME#;
     private IMarkerService _markerService;
 	#NOTRIM#
@@ -16,11 +16,11 @@ public class #SCRIPTNAME#Service : IService
 	public void Constructor(IViewFabric fabric, IMarkerService markerService)
 	{
 		_markerService = markerService;
-		_fabric = fabric;
+		_viewFabric = fabric;
 	}
 
 	public void ActivateService()
 	{       
-        _#SCRIPTNAME# = _fabric.Init<#SCRIPTNAME#>();
+        _#SCRIPTNAME# = _viewFabric.Init<#SCRIPTNAME#>();
 	}
 }
