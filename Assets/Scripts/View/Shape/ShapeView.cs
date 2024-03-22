@@ -1,4 +1,5 @@
 using EventBus;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -7,6 +8,7 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
     private RectTransform _rectTransform;
     private Vector2 _startPosition;
+    public Action ShapePlaced;
 
     private void Awake()
     {
@@ -38,7 +40,8 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {                
             transform.GetChild(0).GetComponent<PieceView>().Place();
         }
-        EventBus<ShapePlaced>.Raise();
+        ShapePlaced.Invoke();
+        Destroy(gameObject); // временно
     }
 }
 
@@ -47,6 +50,7 @@ public class ShapeViewService : IService
     private IViewFabric _viewfabric;
     private ShapeView _shapeView;
     private IMarkerService _markerService;
+    public ShapeData ShapeData;
 
     [Inject]
     public void Constructor(IViewFabric fabric, IMarkerService markerService)
@@ -58,7 +62,17 @@ public class ShapeViewService : IService
     public void ActivateService()
     {
         Transform parent = _markerService.GetMarker<ShapePlaceMarker>().transform;
+        _shapeView = _viewfabric.Init<ShapeView>(ShapeData.Prefab, parent);
+        _shapeView.ShapePlaced += OnShapePlaced;
+    }
 
-        _shapeView = _viewfabric.Init<ShapeView>(parent);
+    public void OnShapePlaced()
+    {
+        EventBus<ShapePlaced>.Raise(new ShapePlaced { shapeViewService = this });
+    }
+
+    public void SetShape(ShapeData shape)
+    {
+        ShapeData = shape;
     }
 }

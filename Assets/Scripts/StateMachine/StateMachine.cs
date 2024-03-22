@@ -30,9 +30,4 @@ public class StateMachine
         _currentState.Enter();
     }
 
-
-    public void UpdateState()
-    {
-        _currentState?.Update();
-    }
 }

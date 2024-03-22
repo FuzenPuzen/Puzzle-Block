@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class DropZoneView : MonoBehaviour
 {
+    public Vector2 point;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

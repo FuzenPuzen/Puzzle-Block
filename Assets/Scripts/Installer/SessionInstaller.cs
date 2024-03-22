@@ -6,6 +6,9 @@ public class SessionInstaller : MonoInstaller
     {
         Container.Bind<StateMachine>().AsSingle();
         Container.Bind<GameCanvasViewService>().AsSingle();
-        Container.Bind<ShapeSpawnViewService>().AsSingle();
+        Container.Bind<FieldViewService>().AsSingle();
+        Container.Bind<ShapeSpawnPlaceViewService>().AsSingle();
+        Container.Bind<ShapeSpawnService>().AsSingle();
+        Container.Bind<FieldCheckService>().AsSingle();
     }
 }

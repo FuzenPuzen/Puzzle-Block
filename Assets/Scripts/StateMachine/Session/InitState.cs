@@ -18,8 +18,4 @@ public class InitState : IBaseState
         
     }
 
-    public void Update()
-    {
-        throw new System.NotImplementedException();
-    }
 }

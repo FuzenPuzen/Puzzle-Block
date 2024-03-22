@@ -2,20 +2,22 @@ using Zenject;
 
 public class StartState : IBaseState
 {
-    [Inject] private ShapeSpawnViewService _shapeSpawnService;
+    [Inject] private ShapeSpawnPlaceViewService _shapeSpawnPlaceService;
+    [Inject] private ShapeSpawnService _shapeSpawnService;
+    [Inject] private FieldViewService _fieldViewService;
+    [Inject] private FieldCheckService _fieldCheckService;
 
     public void Enter()
     {
+        _fieldViewService.ActivateService();
+        _shapeSpawnPlaceService.ActivateService();
         _shapeSpawnService.ActivateService();
+        _fieldCheckService.ActivateService();
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void Update()
-    {
-        throw new System.NotImplementedException();
-    }
 }
