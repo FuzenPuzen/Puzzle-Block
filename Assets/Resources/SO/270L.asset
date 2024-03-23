@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63cb263a260f91649b530d209ed8375d, type: 3}
-  m_Name: Cross Shape
+  m_Name: 270L
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 5123175582052062141, guid: 5ba31565ca6e3a04aa74308447d40f7c, type: 3}
+  Prefab: {fileID: 6991787676972955470, guid: b3453c70e459c02418c44735e0ff582a, type: 3}
   points:
   - {x: -1, y: 0}
-  - {x: 0, y: 1}
+  - {x: -1, y: -1}
   - {x: 1, y: 0}
-  - {x: 0, y: -1}

@@ -36,7 +36,8 @@ public class FieldCheckService : IFieldCheckService
 			{
                 for (int j = 0; j < 10; j++)
                     if (CheckShapePlace(shape, i, j))
-                        MonoBehaviour.print(i +" "+ j + " True");
+                        return;
+                        //MonoBehaviour.print(i +" "+ j + " True");
 			}
     }
 

@@ -47,6 +47,22 @@ public class StorageService : IPrefabStorageService, ISOStorageService
         return obj;
     }
 
+    public List<GameObject> GetPrefabsByType<T>()
+    {
+        List<GameObject> obj = new();
+
+        foreach (GameObject item in prefabs)
+        {
+            // Проверить, есть ли у игрового объекта компонент с заданным именем
+            Component targetComponent = item.GetComponent(typeof(T).Name);
+
+            if (targetComponent != null) obj.Add(item);
+        }
+
+        if (obj == null) Debug.LogError($"Not found Prefabs with type {typeof(T).Name} in {_prefabPath}");
+        return obj;
+    }
+
     public ScriptableObject GetSOByType<T>()
     {
         ScriptableObject obj = null;
