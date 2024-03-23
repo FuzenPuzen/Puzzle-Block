@@ -25,7 +25,7 @@ public class ShapesData : SerializedScriptableObject
             data.Prefab = prefab;
 
             string prefabName = prefab.name;
-            string assetPath = "Assets/Resources/SO/" + prefabName + ".asset";
+            string assetPath = "Assets/Resources/SO/ShapesSo/" + prefabName + ".asset";
             data.FeelPoints();
             ShapeDictionary.Add(shapeID++, data);
             AssetDatabase.CreateAsset(data, assetPath);

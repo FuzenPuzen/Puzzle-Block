@@ -8,7 +8,6 @@ public class ShapeData : ScriptableObject
     public GameObject Prefab;
     [SerializeField] public List<Vector2> points = new();
 
-    [Button]
     public void FeelPoints()
     {
         if(Prefab == null) return;
