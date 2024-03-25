@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,14 +37,12 @@ public class DropZoneView : MonoBehaviour
 
     public bool IsFree()
     {
-        if (transform.childCount > 0) return false;
-        return true;
+        return transform.childCount == 0;
     }
 
     public void Liberate()
     {
-        if(transform.GetChild(0).gameObject != null)
-            Destroy(transform.GetChild(0).gameObject);
+        DestroyImmediate(transform.GetChild(0).gameObject);
     }
     //Ќазвание метода шутка и отсылка к helldivers 2.
     //ѕравильное название должно быть что-то типо "Release"

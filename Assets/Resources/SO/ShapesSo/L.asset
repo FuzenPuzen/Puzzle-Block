@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63cb263a260f91649b530d209ed8375d, type: 3}
   m_Name: L
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 5031775049822374133, guid: 0048b601c6cdf46469a870238fa937a2, type: 3}
+  Prefab: {fileID: 5543469189159880427, guid: 0048b601c6cdf46469a870238fa937a2, type: 3}
   points:
   - {x: 0, y: 1}
   - {x: 1, y: -1}

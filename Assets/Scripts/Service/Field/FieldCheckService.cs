@@ -14,6 +14,7 @@ public class FieldCheckService : IFieldCheckService
     [Inject] private IServiceFabric _serviceFabric;
     [Inject] private ShapeSpawnService _shapeSpawnService;
     [Inject] private FieldViewService _fieldViewService;
+    [Inject] private IScoreDataManager _scoreDataManager;
     private EventBinding<ShapePlaced> _shapePlaced;
 
     private DropZoneView[,] _fieldPoints;
@@ -25,14 +26,20 @@ public class FieldCheckService : IFieldCheckService
     {
         _fieldPoints = _fieldViewService.GetFiledPoints();
         _shapeViewServices = _shapeSpawnService.GetShapeViewServices();
-        _shapePlaced = new(CheckFreePlace);
+        _shapePlaced = new(CheckField);
+    }
+
+    public void CheckField()
+    {
+        CheckFullLines();
+        CheckFreePlace();
     }
 
     private void CheckFreePlace()
     {
         bool freeSpace = false;
-        CheckFullLines();
         _shapeViewServices = _shapeSpawnService.GetShapeViewServices();
+
         foreach (var shape in _shapeViewServices)
             for (int i = 0; i < 10; i++)
             {
@@ -41,10 +48,12 @@ public class FieldCheckService : IFieldCheckService
                     if (CheckShapePlace(shape, i, j))
                     {
                         freeSpace = true;
+                        Debug.Log(i+" "+ j, _fieldPoints[i, j]);
                         return;
                     }
                 }
             }
+
         if (!freeSpace) MonoBehaviour.print("Loose"); //SceneManager.LoadScene(0);
     }
 
@@ -53,6 +62,7 @@ public class FieldCheckService : IFieldCheckService
         if (!_fieldPoints[i, j].IsFree())
             return false;
         _shapePoints = shapeViewService.ShapeData.points;
+
         foreach (var point in _shapePoints)
         {
             if (i + point.x < 0 || j + point.y < 0)
@@ -60,8 +70,12 @@ public class FieldCheckService : IFieldCheckService
             if (i + point.x >= 10 || j + point.y >= 10)
                 return false;
             if (!_fieldPoints[i + (int)point.x, j + (int)point.y].IsFree())
+            {
+                _fieldPoints[i, j].Recolor(Color.blue);
                 return false;
+            }
         }
+        _fieldPoints[i, j].Recolor(Color.green);
         return true;
     }
 
@@ -83,6 +97,7 @@ public class FieldCheckService : IFieldCheckService
         {
             if (rowSum[i] == 10)
             {
+                _scoreDataManager.AddLineScore();
                 ClearRow(i);
             }
         }
@@ -91,6 +106,7 @@ public class FieldCheckService : IFieldCheckService
         {
             if (columnSum[j] == 10)
             {
+                _scoreDataManager.AddLineScore();
                 ClearColumn(j);
             }
         }

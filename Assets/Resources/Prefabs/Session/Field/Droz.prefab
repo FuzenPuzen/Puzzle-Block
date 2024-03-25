@@ -162,3 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d5a095d21b9924dabfe1b8e66e0f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: {x: 0, y: 0}
+  i: {fileID: 0}
+  j: {fileID: 0}

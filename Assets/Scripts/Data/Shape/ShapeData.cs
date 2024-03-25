@@ -12,13 +12,15 @@ public class ShapeData : ScriptableObject
     {
         if(Prefab == null) return;
         points.Clear();
-        foreach (Transform child in Prefab.transform)
+
+        foreach (Transform child in Prefab.transform.GetChild(0))
         {
             if (child.localPosition.x == 0 && child.localPosition.y == 0) continue;
             int x = (int)child.localPosition.x / 100;
             int y = (int)child.localPosition.y / 100;
             points.Add(new(x, y));
         }
+
     }
 }
 

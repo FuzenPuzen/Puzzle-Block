@@ -30,8 +30,8 @@ public class FieldViewService : IService
 		for (int i = 0; i < 10; i++)
 			for (int j = 0; j < 10; j++)
 			{
-				_fieldPoints[j, i] = _fabric.Init<DropZoneView>(_FieldView.transform);
-				_fieldPoints[j, i].point = new Vector2(j, i);
+				_fieldPoints[i, j] = _fabric.Init<DropZoneView>(_FieldView.transform);
+				_fieldPoints[i, j].point = new Vector2(i, j);
             }
 	}
 }

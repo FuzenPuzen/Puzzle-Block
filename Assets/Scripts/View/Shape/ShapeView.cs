@@ -8,15 +8,20 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
     private RectTransform _rectTransform;
     private Vector2 _startPosition;
+    private Transform _shape;
+    private Vector3 _shapeStartScale;
     public Action ShapePlaced;
 
     private void Awake()
     {
+        _shape = transform.GetChild(0);
+        _shapeStartScale = _shape.transform.localScale;
         _rectTransform = GetComponent<RectTransform>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        _shape.transform.localScale = Vector3.one;
         _startPosition = _rectTransform.anchoredPosition;
     }
 
@@ -27,19 +32,24 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        int childcount = transform.childCount;
+        int childcount = transform.GetChild(0).childCount;
+        var shape = transform.GetChild(0);
+
         for (int i = 0; i < childcount; i++)
         {
-            if (!transform.GetChild(i).GetComponent<PieceView>().CheckPlacement())
+            if (!shape.GetChild(i).GetComponent<PieceView>().CheckPlacement())
             {                
                 _rectTransform.anchoredPosition = _startPosition;
+                _shape.transform.localScale = _shapeStartScale;
                 return;
             }
         }
+
         for (int i = 0; i < childcount; i++)
-        {                
-            transform.GetChild(0).GetComponent<PieceView>().Place();
+        {
+            shape.GetChild(0).GetComponent<PieceView>().Place();
         }
+
         ShapePlaced.Invoke();
         Destroy(gameObject); // временно
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63cb263a260f91649b530d209ed8375d, type: 3}
   m_Name: Angle RB
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 8295702357189019554, guid: e0cd93f729840154b95ab0a45f5db7ae, type: 3}
+  Prefab: {fileID: 3606938074324809746, guid: e0cd93f729840154b95ab0a45f5db7ae, type: 3}
   points:
   - {x: 0, y: 1}
   - {x: -1, y: -1}

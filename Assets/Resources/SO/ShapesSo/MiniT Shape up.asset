@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63cb263a260f91649b530d209ed8375d, type: 3}
   m_Name: MiniT Shape up
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 3065061318274699063, guid: 9464ccb1ced544a4e93e2b4c97da797f, type: 3}
+  Prefab: {fileID: 2475727533872587976, guid: 9464ccb1ced544a4e93e2b4c97da797f, type: 3}
   points:
   - {x: -1, y: 0}
   - {x: 1, y: 0}
