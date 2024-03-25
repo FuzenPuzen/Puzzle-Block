@@ -39,4 +39,12 @@ public class DropZoneView : MonoBehaviour
         if (transform.childCount > 0) return false;
         return true;
     }
+
+    public void Liberate()
+    {
+        if(transform.GetChild(0).gameObject != null)
+            Destroy(transform.GetChild(0).gameObject);
+    }
+    //Ќазвание метода шутка и отсылка к helldivers 2.
+    //ѕравильное название должно быть что-то типо "Release"
 }

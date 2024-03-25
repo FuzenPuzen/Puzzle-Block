@@ -1,10 +1,7 @@
-using DG.Tweening.Plugins.Core.PathCore;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.VersionControl.Asset;
 
 [CreateAssetMenu(fileName = "ShapesData", menuName = "ShapesData")]
 public class ShapesData : SerializedScriptableObject
