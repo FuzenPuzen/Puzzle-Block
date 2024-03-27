@@ -27,6 +27,10 @@ public class ScorePanelViewService : IService
         _ScorePanelView = _viewFabric.Init<ScorePanelView>(parent);
         _scoreChanged = new(UpdateScore);
     }
+    public void DeactivateService() 
+    { 
+        _scoreChanged.Remove(UpdateScore);
+    }
 
     private void UpdateScore(ScoreChanged scoreChanged)
     {

@@ -25,6 +25,11 @@ public class ShapeSpawnService : IShapeSpawnService
         SpawnShapes();
     }
 
+    public void DeactivateService()
+    {
+        _shapePlaced.Remove(ShapeCounter);
+    }
+
     private void SpawnShapes()
 	{
         _shapeViewServices?.Clear();

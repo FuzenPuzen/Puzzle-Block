@@ -11,6 +11,7 @@ public class SessionInstaller : MonoInstaller
         Container.Bind<ShapeSpawnService>().AsSingle();
         Container.Bind<FieldCheckService>().AsSingle();
         Container.Bind<ScorePanelViewService>().AsSingle();
+        Container.Bind<LoosePanelViewService>().AsSingle();
         Container.Bind<IScoreDataManager>().To<ScoreDataManager>().AsSingle();
 
     }

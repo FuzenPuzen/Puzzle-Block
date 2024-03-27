@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PieceView : MonoBehaviour
 {
@@ -14,7 +15,11 @@ public class PieceView : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent<DropZoneView>(out DropZoneView dropZone))
+        {
             _currentDropZone = dropZone;
+            if (!_currentDropZone.IsFree()) Recolor(Color.red);
+            else Recolor(Color.white);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -29,8 +34,14 @@ public class PieceView : MonoBehaviour
             ClearDropZone();
     }
 
+    private void Recolor(Color color)
+    {
+        transform.GetComponent<Image>().color = color;
+    }
+
     public void ClearDropZone()
     {
+        Recolor(Color.white);
         _currentDropZone = null;
     }
 

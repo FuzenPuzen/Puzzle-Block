@@ -6,6 +6,7 @@ public class InitState : IBaseState
     [Inject] private StateMachine _stateMachine;
     [Inject] private GameCanvasViewService _gameCanvasViewService;
 
+
     public void Enter()
     {
         _markerService.ActivateService();

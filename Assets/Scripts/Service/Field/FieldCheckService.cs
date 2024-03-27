@@ -2,14 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using EventBus;
-using UnityEngine.SceneManagement;
 
-public interface IFieldCheckService : IService
-{
 
-}
-
-public class FieldCheckService : IFieldCheckService
+public class FieldCheckService : IService
 {
     [Inject] private IServiceFabric _serviceFabric;
     [Inject] private ShapeSpawnService _shapeSpawnService;
@@ -27,6 +22,11 @@ public class FieldCheckService : IFieldCheckService
         _fieldPoints = _fieldViewService.GetFiledPoints();
         _shapeViewServices = _shapeSpawnService.GetShapeViewServices();
         _shapePlaced = new(CheckField);
+    }
+
+    public void DeactivateService()
+    {
+        _shapePlaced.Remove(CheckField);
     }
 
     public void CheckField()
@@ -48,13 +48,13 @@ public class FieldCheckService : IFieldCheckService
                     if (CheckShapePlace(shape, i, j))
                     {
                         freeSpace = true;
-                        Debug.Log(i+" "+ j, _fieldPoints[i, j]);
+                        _fieldPoints[i, j].Recolor(Color.green);
                         return;
                     }
                 }
             }
 
-        if (!freeSpace) MonoBehaviour.print("Loose"); //SceneManager.LoadScene(0);
+        if (!freeSpace) EventBus<OnLoose>.Raise();
     }
 
     public bool CheckShapePlace(ShapeViewService shapeViewService, int i, int j)
@@ -75,7 +75,6 @@ public class FieldCheckService : IFieldCheckService
                 return false;
             }
         }
-        _fieldPoints[i, j].Recolor(Color.green);
         return true;
     }
 
