@@ -19,6 +19,7 @@ public class LoosePanelView : MonoBehaviour
         OnRestartButtonAction?.Invoke();
     }
 
+
     public void HideView()
     {
         gameObject.SetActive(false);

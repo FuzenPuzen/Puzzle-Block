@@ -48,7 +48,6 @@ public class FieldCheckService : IService
                     if (CheckShapePlace(shape, i, j))
                     {
                         freeSpace = true;
-                        _fieldPoints[i, j].Recolor(Color.green);
                         return;
                     }
                 }
@@ -70,10 +69,7 @@ public class FieldCheckService : IService
             if (i + point.x >= 10 || j + point.y >= 10)
                 return false;
             if (!_fieldPoints[i + (int)point.x, j + (int)point.y].IsFree())
-            {
-                _fieldPoints[i, j].Recolor(Color.blue);
                 return false;
-            }
         }
         return true;
     }
