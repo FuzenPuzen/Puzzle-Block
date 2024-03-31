@@ -9,7 +9,7 @@ public class ShapesData : SerializedScriptableObject
     [DictionaryDrawerSettings(KeyLabel = "ID", ValueLabel = "ShapeData")]
     public Dictionary<int, ShapeData> ShapeDictionary = new Dictionary<int, ShapeData>();
 
-   /* [Button]
+    /*[Button]
     public void ScanResources()
     {
         ShapeDictionary.Clear();
