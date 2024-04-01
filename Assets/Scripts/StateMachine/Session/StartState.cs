@@ -9,6 +9,7 @@ public class StartState : IBaseState
     [Inject] private FieldCheckService _fieldCheckService;
     [Inject] private ScorePanelViewService _scorePanelViewService;
     [Inject] private LoosePanelViewService _loosePanelViewService;
+    [Inject] private TutorialViewService _tutorialViewService;
 
 
     public void Enter()
@@ -19,6 +20,7 @@ public class StartState : IBaseState
         _fieldCheckService.ActivateService();
         _scorePanelViewService.ActivateService();
         _loosePanelViewService.ActivateService();
+        _tutorialViewService.ActivateService();
         _stateMachine.SetState<GameState>();
     }
 

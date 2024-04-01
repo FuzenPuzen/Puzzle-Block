@@ -13,6 +13,7 @@ public class SessionInstaller : MonoInstaller
         Container.Bind<ScorePanelViewService>().AsSingle();
         Container.Bind<LoosePanelViewService>().AsSingle();
         Container.Bind<MainCameraViewService>().AsSingle();
+        Container.Bind<TutorialViewService>().AsSingle();
         Container.Bind<IScoreDataManager>().To<ScoreDataManager>().AsSingle();
 
     }

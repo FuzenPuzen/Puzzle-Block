@@ -8,6 +8,7 @@ public class InitState : IBaseState
     [Inject] private MainCameraViewService _mainCameraViewService;
 
 
+
     public void Enter()
     {
         _mainCameraViewService.ActivateService();
