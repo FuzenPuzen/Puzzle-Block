@@ -10,7 +10,7 @@ public class FieldCheckService : IService
     [Inject] private ShapeSpawnService _shapeSpawnService;
     [Inject] private FieldViewService _fieldViewService;
     [Inject] private IScoreDataManager _scoreDataManager;
-    private EventBinding<ShapePlaced> _shapePlaced;
+    private EventBinding<OnShapePlaced> _shapePlaced;
 
     private DropZoneView[,] _fieldPoints;
     private List<ShapeViewService> _shapeViewServices;
@@ -109,17 +109,11 @@ public class FieldCheckService : IService
 
     public void ClearRow(int i)
     {
-        for (int j = 0; j < 10; j++)
-        {
-            _fieldPoints[i, j].Liberate();
-        }
+        _fieldViewService.ClearRow(i);
     }
 
     public void ClearColumn(int j)
     {
-        for (int i = 0; i < 10; i++)
-        {
-            _fieldPoints[i, j].Liberate();
-        }
+        _fieldViewService.ClearColumn(j);
     }
 }

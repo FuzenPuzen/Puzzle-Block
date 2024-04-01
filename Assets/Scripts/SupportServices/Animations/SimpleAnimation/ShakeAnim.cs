@@ -19,15 +19,17 @@ public class ShakeAnim : Anim
         base.OnEnable();
     }
 
-    public override void Play()
+    public override void Play(Action Oncomplete = null, float PlayDelay = 0)
     {
         _animSequence.Kill();
         _animSequence = DOTween.Sequence();
+        _animSequence.AppendInterval(PlayDelay);
         _animSequence.Append(transform.DOShakePosition(_shakeDuration,
                                                        _shakeForce,
                                                        _shakeVibrato,
                                                        fadeOut: false,
                                                        randomnessMode: ShakeRandomnessMode.Harmonic));
+        _animSequence.OnComplete(() => Oncomplete?.Invoke());
     }
 
     public override void SetValues(AnimData AnimData)

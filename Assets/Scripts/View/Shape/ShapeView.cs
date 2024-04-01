@@ -78,7 +78,7 @@ public class ShapeViewService : IService
 
     public void OnShapePlaced()
     {
-        EventBus<ShapePlaced>.Raise(new ShapePlaced { shapeViewService = this });
+        EventBus<OnShapePlaced>.Raise(new OnShapePlaced { shapeViewService = this });
     }
 
     public void SetShape(ShapeData shape)

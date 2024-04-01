@@ -1,4 +1,3 @@
-using EventBus;
 using Zenject;
 
 public class StartState : IBaseState
@@ -10,7 +9,7 @@ public class StartState : IBaseState
     [Inject] private FieldCheckService _fieldCheckService;
     [Inject] private ScorePanelViewService _scorePanelViewService;
     [Inject] private LoosePanelViewService _loosePanelViewService;
-    private EventBinding<OnLoose> _onLoose;
+
 
     public void Enter()
     {
@@ -20,17 +19,11 @@ public class StartState : IBaseState
         _fieldCheckService.ActivateService();
         _scorePanelViewService.ActivateService();
         _loosePanelViewService.ActivateService();
-        _onLoose = new(OnLoose);
+        _stateMachine.SetState<GameState>();
     }
 
     public void Exit()
     {
-        _onLoose.Remove(OnLoose);
+       
     }
-
-    public void OnLoose()
-    {
-        _stateMachine.SetState<LooseState>();
-    }
-
 }

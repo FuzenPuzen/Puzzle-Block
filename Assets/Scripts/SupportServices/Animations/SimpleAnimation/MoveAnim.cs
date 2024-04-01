@@ -17,13 +17,15 @@ public class MoveAnim : Anim
     	base.OnEnable();
 	}
 	
- 	public override void Play()
- 	{
-     		_animSequence.Kill();
-     		_animSequence = DOTween.Sequence();
-            _animSequence.Append(transform.DOLocalMove(_moveAnimData.MoveVector,
-                                            _moveAnimData.Duration)
-                                            .SetEase(Ease.Linear));
+ 	public override void Play(Action Oncomplete = null, float PlayDelay = 0)
+    {
+     	_animSequence.Kill();
+     	_animSequence = DOTween.Sequence();
+        _animSequence.AppendInterval(PlayDelay);
+        _animSequence.Append(transform.DOLocalMove(_moveAnimData.MoveVector,
+                                        _moveAnimData.Duration)
+                                        .SetEase(Ease.Linear));
+        _animSequence.OnComplete(() => Oncomplete?.Invoke());
         if (_moveAnimData.IsReverse)
         {
             _moveAnimData.MoveVector = -_moveAnimData.MoveVector;

@@ -22,7 +22,6 @@ public class FieldViewService : IService
 
 	public DropZoneView[,] GetFiledPoints() => _fieldPoints;
 
-
     public void ActivateService()
 	{
 		Transform parent = _markerService.GetMarker<GameCanvasMarker>().transform;
@@ -31,7 +30,23 @@ public class FieldViewService : IService
 			for (int j = 0; j < 10; j++)
 			{
 				_fieldPoints[i, j] = _fabric.Init<DropZoneView>(_FieldView.transform);
-				_fieldPoints[i, j].point = new Vector2(i, j);
+				_fieldPoints[i, j].Point = new Vector2(i, j);
             }
 	}
+
+    public void ClearRow(int i)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            _fieldPoints[i, j].Liberate(j);
+        }
+    }
+
+    public void ClearColumn(int j)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            _fieldPoints[i, j].Liberate(i);
+        }
+    }
 }

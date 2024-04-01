@@ -1,10 +1,9 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DropZoneView : MonoBehaviour
 {
-    public Vector2 point;
+    public Vector2 Point;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -37,13 +36,16 @@ public class DropZoneView : MonoBehaviour
 
     public bool IsFree()
     {
-        return transform.childCount == 0;
+        Recolor(Color.white);
+        if (transform.childCount != 0)
+            return !transform.GetChild(0).GetComponent<PieceView>().IsActive();
+        return true;
     }
 
-    public void Liberate()
+    public void Liberate(int i)
     {
         if(transform.GetChild(0) != null)
-            DestroyImmediate(transform.GetChild(0).gameObject);
+            transform.GetChild(0).GetComponent<PieceView>().Disable(i);
     }
     //Ќазвание метода шутка и отсылка к helldivers 2.
     //ѕравильное название должно быть что-то типо "Release"

@@ -14,13 +14,15 @@ public class RotateAnim : Anim
     		base.OnEnable();
 	}
 	
- 	public override void Play()
- 	{
-     		_animSequence.Kill();
-     		_animSequence = DOTween.Sequence();
-            _animSequence.Append(transform.DOLocalRotate(_RotateAnimData.RotationVector,
+ 	public override void Play(Action Oncomplete = null, float PlayDelay = 0)
+    {
+     	_animSequence.Kill();
+     	_animSequence = DOTween.Sequence();
+        _animSequence.AppendInterval(PlayDelay);
+        _animSequence.Append(transform.DOLocalRotate(_RotateAnimData.RotationVector,
                                                         _RotateAnimData.Duration, _RotateAnimData.RotateMod)
                                                         .SetEase(Ease.Linear));
+        _animSequence.OnComplete(() => Oncomplete?.Invoke());
         if (_RotateAnimData.IsReverse)
             _RotateAnimData.RotationVector = -_RotateAnimData.RotationVector;
 

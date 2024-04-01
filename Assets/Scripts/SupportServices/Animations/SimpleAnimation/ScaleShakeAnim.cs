@@ -1,6 +1,5 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ScaleShakeAnim  : Anim
@@ -18,16 +17,18 @@ public class ScaleShakeAnim  : Anim
         base.OnEnable();
     }
 
-    public override void Play()
+    public override void Play(Action Oncomplete = null, float PlayDelay = 0)
     {
         _animSequence.Complete();
         _animSequence.Kill();
         _animSequence = DOTween.Sequence();
+        _animSequence.AppendInterval(PlayDelay);
         _animSequence.Append(transform.DOShakeScale(_shakeDuration,
                                                        _shakeForce,
                                                        _shakeVibrato,
                                                        fadeOut: false,
                                                        randomnessMode: ShakeRandomnessMode.Harmonic));
+        _animSequence.OnComplete(() => Oncomplete?.Invoke());
     }
 
     public override void SetValues(AnimData AnimData)

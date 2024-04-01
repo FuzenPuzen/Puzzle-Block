@@ -2,36 +2,37 @@ using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System;
-#NOTRIM#
+using UnityEngine.UI;
+
 [ShowOdinSerializedPropertiesInInspector]
-public class #SCRIPTNAME# : Anim
+public class FadeAnim : Anim
 {
-	[SerializeField] private #SCRIPTNAME#Data _#SCRIPTNAME#Data;
+	[SerializeField] private FadeAnimData _FadeAnimData;
 	public override void OnEnable()
 	{
-    		_animData = (AnimData)_#SCRIPTNAME#Data;
-    		SetValues(_#SCRIPTNAME#Data);
+    		_animData = (AnimData)_FadeAnimData;
+    		SetValues(_FadeAnimData);
     		base.OnEnable();
 	}
-	#NOTRIM#
+	
  	public override void Play(Action Oncomplete = null, float PlayDelay = 0)
     {
      	_animSequence.Kill();
      	_animSequence = DOTween.Sequence();
         _animSequence.AppendInterval(PlayDelay);
-        //Анимация
+        _animSequence.Append(transform.GetComponent<Image>().DOFade(0, _animData.Duration));
         _animSequence.OnComplete(() => Oncomplete?.Invoke());      
     }
-	#NOTRIM#
+	
 	 public override void SetValues(AnimData AnimData)
  	{
-		//var #SCRIPTNAME#Data = AnimData as #SCRIPTNAME#Data;
+		//var FadeAnimData = AnimData as FadeAnimData;
 		//Парсинг данных для анимации(Если необходимо)
 	}
 }
-#NOTRIM#
+
 [Serializable]
-public class #SCRIPTNAME#Data : AnimData
+public class FadeAnimData : AnimData
 {
    //Класс данных для анимации
 }

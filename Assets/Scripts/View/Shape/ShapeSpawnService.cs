@@ -16,7 +16,7 @@ public class ShapeSpawnService : IShapeSpawnService
     private ShapeViewService _shapeViewService;
     private List<ShapeViewService> _shapeViewServices = new();
 
-    private EventBinding<ShapePlaced> _shapePlaced;
+    private EventBinding<OnShapePlaced> _shapePlaced;
 
     public void ActivateService()
 	{
@@ -50,7 +50,7 @@ public class ShapeSpawnService : IShapeSpawnService
 
     public List<ShapeViewService> GetShapeViewServices() => _shapeViewServices;
 
-    private void ShapeCounter(ShapePlaced shapePlaced)
+    private void ShapeCounter(OnShapePlaced shapePlaced)
     {
         _shapeViewServices.Remove(shapePlaced.shapeViewService);
         if (_shapeViewServices.Count == 0)

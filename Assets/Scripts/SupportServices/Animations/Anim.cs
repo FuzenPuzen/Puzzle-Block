@@ -10,7 +10,8 @@ public class Anim : MonoBehaviour
     internal AnimData _animData;
     internal Coroutine _coroutine;
 
-    public virtual void Play() { }
+   // public virtual void Play() { }
+    public virtual void Play(Action Oncomplete = null, float PlayDelay = 0) { }
 
     public virtual void SetValues(AnimData shakeAnimData) { }
 
@@ -38,7 +39,7 @@ public class Anim : MonoBehaviour
         {
             _coroutine = StartCoroutine(AnimDelay(_animData.StartDelay, PlayLooped)); return;
         }
-        _coroutine = StartCoroutine(AnimDelay(_animData.StartDelay, Play));
+        _coroutine = StartCoroutine(AnimDelay(_animData.StartDelay,() => Play()));
     }
 
     public virtual void PlayLooped()
@@ -61,6 +62,7 @@ public class Anim : MonoBehaviour
 
 public class AnimData
 {
+    [HideInInspector] public float PlayDelay;
     [SerializeField] public bool IsLoop;
     [ShowIf("IsLoop")]
     [SerializeField] public float LoopDelay;
