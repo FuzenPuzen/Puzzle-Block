@@ -32,7 +32,7 @@ public class TutorialViewService : IService
 	private TutorialView _tutorialView;
     [Inject] private IMarkerService _markerService;
 	private int _isTutorial = 1;
-	private string key = "Update2";
+	private string key = "Update3";
 
     public void ActivateService()
 	{
