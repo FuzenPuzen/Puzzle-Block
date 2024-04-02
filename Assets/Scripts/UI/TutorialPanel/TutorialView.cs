@@ -32,16 +32,17 @@ public class TutorialViewService : IService
 	private TutorialView _tutorialView;
     [Inject] private IMarkerService _markerService;
 	private int _isTutorial = 1;
-	
-	public void ActivateService()
+	private string key = "Update2";
+
+    public void ActivateService()
 	{
-		if (PlayerPrefs.HasKey("isTutorial"))
-            _isTutorial = PlayerPrefs.GetInt("isTutorial");
+		if (PlayerPrefs.HasKey(key))
+            _isTutorial = PlayerPrefs.GetInt(key);
         if (_isTutorial == 1)
 		{
 			Transform parent = _markerService.GetMarker<GameCanvasMarker>().transform;
 			_tutorialView = _viewFabric.Init<TutorialView>(parent);
-			PlayerPrefs.SetInt("isTutorial", 0);
+			PlayerPrefs.SetInt(key, 0);
         }
 	}
 	

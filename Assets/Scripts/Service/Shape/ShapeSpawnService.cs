@@ -12,6 +12,7 @@ public class ShapeSpawnService : IShapeSpawnService
 {
 	[Inject] private IServiceFabric _serviceFabric;
 	[Inject] private ISOStorageService _sOStorageService;
+	[Inject] private IShapeCheckService _shapeCheckService;
 	private ShapesData _shapesData;
     private ShapeViewService _shapeViewService;
     private List<ShapeViewService> _shapeViewServices = new();
@@ -33,9 +34,20 @@ public class ShapeSpawnService : IShapeSpawnService
     private void SpawnShapes()
 	{
         _shapeViewServices?.Clear();
+        int randomId;
+        ShapeData shapeData;
         for (int i = 0; i < 3; i++)
         {
-            int randomId = Random.Range(0, _shapesData.ShapeDictionary.Count);
+            randomId = Random.Range(0, _shapesData.ShapeDictionary.Count);
+            shapeData = _shapesData.ShapeDictionary[randomId];
+
+            //if (i == 0)
+                while (!_shapeCheckService.CheckFieldSpace(shapeData))
+                {
+                    randomId = Random.Range(0, _shapesData.ShapeDictionary.Count);
+                    shapeData = _shapesData.ShapeDictionary[randomId];
+                }
+
             _shapeViewService = _serviceFabric.InitMultiple<ShapeViewService>();
             _shapeViewServices.Add(_shapeViewService);
             _shapeViewService.SetShape(_shapesData.ShapeDictionary[randomId]);

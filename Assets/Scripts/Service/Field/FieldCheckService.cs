@@ -35,7 +35,7 @@ public class FieldCheckService : IService
         CheckFreePlace();
     }
 
-    private void CheckFreePlace()
+    public void CheckFreePlace()
     {
         bool freeSpace = false;
         _shapeViewServices = _shapeSpawnService.GetShapeViewServices();
