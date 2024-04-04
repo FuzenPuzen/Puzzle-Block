@@ -1,7 +1,7 @@
 using EventBus;
 using UnityEngine;
 
-public class RecordData : MonoBehaviour
+public class RecordData
 {
     public int Record;
 }

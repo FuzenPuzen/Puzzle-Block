@@ -7,8 +7,12 @@ public class StartState : IBaseState
     [Inject] private ShapeSpawnService _shapeSpawnService;
     [Inject] private FieldViewService _fieldViewService;
     [Inject] private FieldCheckService _fieldCheckService;
+
     [Inject] private ScorePanelViewService _scorePanelViewService;
     [Inject] private LoosePanelViewService _loosePanelViewService;
+    [Inject] private RestartPanelViewService _restartPanelViewService;
+    [Inject] private RestartButtonViewService _restartButtonViewService;
+
     [Inject] private TutorialViewService _tutorialViewService;
     [Inject] private RecordPanelViewService _recordPanelViewService;
     [Inject] private IShapeCheckService _shapeCheckService;
@@ -22,7 +26,11 @@ public class StartState : IBaseState
         _shapeSpawnService.ActivateService();
         _fieldCheckService.ActivateService();
         _scorePanelViewService.ActivateService();
+
         _loosePanelViewService.ActivateService();
+        _restartPanelViewService.ActivateService();
+        _restartButtonViewService.ActivateService();
+
         _tutorialViewService.ActivateService();
         _recordPanelViewService.ActivateService();
         _stateMachine.SetState<GameState>();
