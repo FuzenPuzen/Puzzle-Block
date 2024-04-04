@@ -27,7 +27,8 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        _rectTransform.anchoredPosition += eventData.delta;
+        _rectTransform.anchoredPosition += eventData.delta*2;
+        //transform.Translate(eventData.delta);
     }
 
     public void OnEndDrag(PointerEventData eventData)
