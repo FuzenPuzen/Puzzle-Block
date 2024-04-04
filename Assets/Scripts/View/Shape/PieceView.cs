@@ -40,8 +40,8 @@ public class PieceView : MonoBehaviour
     {
         _isActive = false;
         _boxCollider.enabled = false;
-        _scaleAnim.Play(PlayDelay: i * 0.1f);
-        _fadeAnim.Play(OnAnimEnd, i * 0.1f);
+        _scaleAnim.Play(PlayDelay: i * 0.05f);
+        _fadeAnim.Play(OnAnimEnd, i * 0.05f);
     }
 
     private void OnAnimEnd()

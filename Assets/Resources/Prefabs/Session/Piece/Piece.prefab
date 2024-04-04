@@ -183,7 +183,7 @@ MonoBehaviour:
     LoopDelay: 0
     IsAutoPlay: 0
     StartDelay: 0
-    Duration: 0.4
+    Duration: 0.3
     ScaleSize: {x: 1.3, y: 1.3, z: 1.3}
 --- !u!114 &1012088017477523640
 MonoBehaviour:
@@ -203,4 +203,4 @@ MonoBehaviour:
     LoopDelay: 0
     IsAutoPlay: 0
     StartDelay: 0
-    Duration: 0.4
+    Duration: 0.3
