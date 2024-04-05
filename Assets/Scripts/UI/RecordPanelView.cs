@@ -9,7 +9,7 @@ public class RecordPanelView : MonoBehaviour
 
 	public void UpdateView(int record)
 	{
-        _record.text ="Рекорд: " + record.ToString();
+        _record.text ="Рекорд\n" + record.ToString();
     }
 }
 

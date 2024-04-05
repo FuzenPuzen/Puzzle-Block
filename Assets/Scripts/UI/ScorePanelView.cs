@@ -9,7 +9,7 @@ public class ScorePanelView : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        _scoreText.text = "Ñ÷¸ò: " + score.ToString();
+        _scoreText.text = "Ñ÷¸ò\n" + score.ToString();
     }
 }
 

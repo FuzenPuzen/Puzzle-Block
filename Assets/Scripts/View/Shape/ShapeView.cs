@@ -10,6 +10,7 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Vector2 _startPosition;
     private Transform _shape;
     private Vector3 _shapeStartScale;
+    private float _multiDrag;
     public Action ShapePlaced;
 
     private void Awake()
@@ -19,15 +20,21 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         _rectTransform = GetComponent<RectTransform>();
     }
 
+    public void SetMultiDrag(float multiDrag)
+    {
+        _multiDrag = multiDrag;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         _shape.transform.localScale = Vector3.one;
         _startPosition = _rectTransform.anchoredPosition;
+        _rectTransform.anchoredPosition += new Vector2(0, 150);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        _rectTransform.anchoredPosition += eventData.delta*2;
+        _rectTransform.anchoredPosition += eventData.delta * _multiDrag;
         //transform.Translate(eventData.delta);
     }
 
@@ -58,23 +65,28 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
 public class ShapeViewService : IService
 {
-    private IViewFabric _viewfabric;
+    [Inject] private IViewFabric _viewfabric;
     private ShapeView _shapeView;
-    private IMarkerService _markerService;
+    [Inject] private IMarkerService _markerService;
+    [Inject] private GameCanvasViewService _gameCanvasViewService;
     public ShapeData ShapeData;
 
-    [Inject]
-    public void Constructor(IViewFabric fabric, IMarkerService markerService)
-    {
-        _markerService = markerService;
-        _viewfabric = fabric;
-    }
 
     public void ActivateService()
     {
         Transform parent = _markerService.GetMarker<ShapePlaceMarker>().transform;
         _shapeView = _viewfabric.Init<ShapeView>(ShapeData.Prefab, parent);
         _shapeView.ShapePlaced += OnShapePlaced;
+        _shapeView.SetMultiDrag(CalculateMultiDrag());
+    }
+
+    public float CalculateMultiDrag()
+    {
+        Canvas _canvas = _gameCanvasViewService.GetCanvas();
+        Debug.Log(_canvas.GetComponent<RectTransform>().rect.width);
+        Debug.Log(Screen.width);
+        
+        return _canvas.GetComponent<RectTransform>().rect.width / Screen.width;
     }
 
     public void OnShapePlaced()

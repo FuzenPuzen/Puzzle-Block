@@ -1,6 +1,7 @@
 using Zenject;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class GameCanvasView : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameCanvasView : MonoBehaviour
         _canvas = GetComponent<Canvas>();
         _canvas.worldCamera = camera;
     }
+
+    public Canvas GetCanvas() => _canvas;
 }
 
 public class GameCanvasViewService : IService
@@ -25,6 +28,7 @@ public class GameCanvasViewService : IService
 	{       
         _GameCanvasView = _viewFabric.Init<GameCanvasView>();
         _GameCanvasView.SetCamera(_mainCameraViewService.GetCamera());
-
     }
+
+    public Canvas GetCanvas() => _GameCanvasView.GetCanvas();
 }
