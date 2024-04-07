@@ -43,6 +43,7 @@ public class LRPanelView : MonoBehaviour
     public void HideView()
     {
         gameObject.SetActive(false);
+        transform.localScale = Vector3.zero;
     }
 
     public void ShowView()
