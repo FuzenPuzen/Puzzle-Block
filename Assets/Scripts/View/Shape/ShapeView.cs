@@ -82,10 +82,7 @@ public class ShapeViewService : IService
 
     public float CalculateMultiDrag()
     {
-        Canvas _canvas = _gameCanvasViewService.GetCanvas();
-        Debug.Log(_canvas.GetComponent<RectTransform>().rect.width);
-        Debug.Log(Screen.width);
-        
+        Canvas _canvas = _gameCanvasViewService.GetCanvas();        
         return _canvas.GetComponent<RectTransform>().rect.width / Screen.width;
     }
 

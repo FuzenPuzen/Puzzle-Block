@@ -15,6 +15,9 @@ public class SessionInstaller : MonoInstaller
         Container.Bind<LoosePanelViewService>().AsSingle();
         Container.Bind<RestartButtonViewService>().AsSingle();
 
+        Container.Bind<YSaveService>().AsSingle();
+        Container.Bind<YADService>().AsSingle();
+
         Container.Bind<MainCameraViewService>().AsSingle();
         Container.Bind<TutorialViewService>().AsSingle();
         Container.Bind<RecordPanelViewService>().AsSingle();

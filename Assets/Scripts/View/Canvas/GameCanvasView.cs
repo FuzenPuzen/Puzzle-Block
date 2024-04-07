@@ -1,7 +1,5 @@
 using Zenject;
 using UnityEngine;
-using UnityEngine.UI;
-using Unity.VisualScripting;
 
 public class GameCanvasView : MonoBehaviour
 {

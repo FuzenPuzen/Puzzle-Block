@@ -1,10 +1,11 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class SaveLoader
 {
-    /*public static T LoadItem<T>(string key)
+    public static T LoadItem<T>(string key)
     {
         return JsonConvert.DeserializeObject<T>(PlayerPrefs.GetString(key));
     }
@@ -28,8 +29,9 @@ public static class SaveLoader
         return JsonConvert.DeserializeObject<List<T>>(PlayerPrefs.GetString(key));
     }
 
-    public static T LoadData<T>(T obj, string key)
+    public static T LoadData<T>(T obj, string key) where T : class
     {
+
         if (!PlayerPrefs.HasKey(key))
         {
             SaveItem(obj, key);
@@ -54,5 +56,5 @@ public static class SaveLoader
         }
 
         return objs;
-    }*/
+    }
 }

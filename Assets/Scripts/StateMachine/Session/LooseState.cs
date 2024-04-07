@@ -9,6 +9,7 @@ public class LooseState : IBaseState
     [Inject] private ShapeSpawnService _shapeSpawnService;
     [Inject] private ScorePanelViewService _scorePanelViewService;
     [Inject] private RecordPanelViewService _recordPanelViewService;
+    [Inject] private YADService _yADService;
     [Inject] private IRecordDataManager _recordDataManager;
     private EventBinding<OnRestart> _onRestart;
 
@@ -19,6 +20,7 @@ public class LooseState : IBaseState
         _scorePanelViewService.DeactivateService();
         _recordPanelViewService.DeactivateService();
         _recordDataManager.DeactivateService();
+        _yADService.ShowAD();
         _loosePanelViewService.ShowView();
         _onRestart = new(OnRestartButton);
     }

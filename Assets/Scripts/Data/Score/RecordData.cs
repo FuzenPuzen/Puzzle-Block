@@ -1,8 +1,14 @@
 using EventBus;
 using UnityEngine;
+using Zenject;
 
 public class RecordData
 {
+    public RecordData()
+    {
+        Record = 0;
+    }
+
     public int Record;
 }
 
@@ -15,12 +21,13 @@ public interface IRecordDataManager : IService
 public class RecordDataManager : IRecordDataManager
 {
     private RecordData _recordData = new();
+    [Inject] private YSaveService _YSaveService = new();
     private EventBinding<ScoreChanged> _scoreChanged;
     private const string RecordKey = "RecordKey";
 
     public void ActivateService()
     {
-        _recordData.Record = LoadRecord();
+        _recordData = LoadRecord();
         _scoreChanged = new(CheckRecord);
     }
 
@@ -37,18 +44,15 @@ public class RecordDataManager : IRecordDataManager
             SetRecord(scoreChanged.score);
     }
 
-    private int LoadRecord()
-    {
-        if (PlayerPrefs.HasKey(RecordKey))
-            return PlayerPrefs.GetInt(RecordKey, 0);
-        PlayerPrefs.SetInt(RecordKey, 0);
-        return 0;
+    private RecordData LoadRecord()
+    {       
+        return _YSaveService.LoadRecord();
     }
-    
+
     private void SetRecord(int newRecord)
     {
         _recordData.Record = newRecord;
-        PlayerPrefs.SetInt(RecordKey, newRecord);
+        _YSaveService.SaveRecord(_recordData);
         EventBus<RecordChanged>.Raise(new RecordChanged { record = newRecord });
     }
 
