@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 public interface IPoolsViewService : IService
@@ -10,20 +9,13 @@ public interface IPoolsViewService : IService
 
 public class PoolsViewService : IPoolsViewService
 {
-	private IServiceFabric _serviceFabric;
+    [Inject] private IServiceFabric _serviceFabric;
 	private Dictionary<Type, IPoolViewService> _pools = new();
-
-    [Inject]
-	public void Constructor(IServiceFabric serviceFabric)
-	{
-        _serviceFabric = serviceFabric;
-    }
 	
 	public void ActivateService()
 	{
 		
     }
-
 
 	private void InitPool<T>(int count = 10) where T : class
 	{
@@ -35,7 +27,7 @@ public class PoolsViewService : IPoolsViewService
 
 	public IPoolViewService GetPool<T>() where T : class
     {
-		if (_pools[typeof(T)] == null)
+		if (!_pools.ContainsKey(typeof(T)))
 			InitPool<T>();
         return _pools[typeof(T)];
 	}

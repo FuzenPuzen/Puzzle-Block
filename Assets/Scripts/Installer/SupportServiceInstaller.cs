@@ -18,5 +18,6 @@ public class SupportServiceInstaller : MonoInstaller
         Container.Bind<IPoolsViewService>().To<PoolsViewService>().AsSingle();
 
         Container.Bind<ITimerService>().To<TimerService>().AsSingle();
+        Container.Bind<IAudioDataManager>().To<AudioDataManager>().AsSingle();
     }
 }

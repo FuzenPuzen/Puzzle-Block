@@ -22,8 +22,11 @@ public class SessionInstaller : MonoInstaller
         Container.Bind<TutorialViewService>().AsSingle();
         Container.Bind<RecordPanelViewService>().AsSingle();
         Container.Bind<RestartPanelViewService>().AsSingle();
+
+        Container.Bind<AudioUnitViewService>().AsSingle();
         Container.Bind<IScoreDataManager>().To<ScoreDataManager>().AsSingle();
         Container.Bind<IRecordDataManager>().To<RecordDataManager>().AsSingle();
+        Container.Bind<IAudioService>().To<AudioService>().AsSingle();
         Container.Bind<IShapeCheckService>().To<ShapeCheckService>().AsSingle();
 
     }

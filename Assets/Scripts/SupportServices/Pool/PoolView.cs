@@ -24,22 +24,14 @@ public class PoolViewService : IPoolViewService
     private List<IPoolingViewService> _freeItems = new();
 
     private List<IPoolingViewService> _viewServices = new();
-	private IServiceFabric _serviceFabric;
-    private IViewFabric _viewFabric;
+    [Inject] private IServiceFabric _serviceFabric;
+    [Inject] private IViewFabric _viewFabric;
     private PoolView _poolView;
 	private int _objCount;
 
-    [Inject]
-	public void Constructor(IServiceFabric serviceFabric, IViewFabric viewFabric)
-	{
-        _serviceFabric = serviceFabric;
-        _viewFabric = viewFabric;
-    }
-
     public void ActivateService()
     {
-        _poolView = _viewFabric.Init<PoolView>();
-        
+        _poolView = _viewFabric.Init<PoolView>();       
     }
 
     public int GetViewServicesCount() => _viewServices.Count;
@@ -70,7 +62,7 @@ public class PoolViewService : IPoolViewService
     private void SpawnAddedItem<T>() where T : class
     {
         IPoolingViewService item = (IPoolingViewService)_serviceFabric.InitMultiple<T>();
-        item.ActivateServiceFromPool();
+        item.ActivateServiceFromPool(_poolView.transform);
         item.SetDeactivateAction(ReturnItem);
         _viewServices.Add(item);
         _freeItems.Add(item);
