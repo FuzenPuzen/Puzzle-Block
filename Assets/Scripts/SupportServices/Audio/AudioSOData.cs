@@ -11,14 +11,8 @@ public class AudioSOData : SerializedScriptableObject
     [DictionaryDrawerSettings(KeyLabel = "AudioEnum", ValueLabel = "AudioClip")]
     public Dictionary<AudioEnum, AudioClip> audioDictionary = new Dictionary<AudioEnum, AudioClip>();
 
-    [Button]
-    public void FillAudio()
-    {
-        audioDictionary.Clear();
-        FillAudioDictionary();
-        UpdateAudioEnum();
-    }
 
+   /* [Button]
     // Метод для заполнения словаря звуков
     public void FillAudioDictionary()
     {
@@ -48,6 +42,7 @@ public class AudioSOData : SerializedScriptableObject
         }
     }
 
+    [Button]
     private void UpdateAudioEnum()
     {
 
@@ -116,5 +111,5 @@ public class AudioSOData : SerializedScriptableObject
         }
 
         return null;
-    }
+    }*/
 }

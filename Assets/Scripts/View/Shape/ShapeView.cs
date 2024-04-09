@@ -91,7 +91,7 @@ public class ShapeViewService : IService
 
     public void OnShapeTake()
     {
-        _audioService.PlayAudio(AudioEnum.Puk, false);
+        _audioService.PlayAudio(AudioEnum.Take, false);
     }
 
     public void OnShapePlaced()

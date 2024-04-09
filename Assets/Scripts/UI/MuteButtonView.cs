@@ -4,9 +4,11 @@ using UnityEngine.UI;
 using System;
 
 [RequireComponent(typeof(Button))]
+[RequireComponent(typeof(ScaleShakeAnim))]
 public class MuteButtonView : MonoBehaviour
 {
 	private Button _mutetButton;
+	private ScaleShakeAnim _scaleShakeAnim;
 	[SerializeField] private Sprite _muteImage;
 	[SerializeField] private Sprite _unMuteImage;
 
@@ -17,11 +19,13 @@ public class MuteButtonView : MonoBehaviour
 	private void Awake()
 	{
         _mutetButton = GetComponent<Button>();
+        _scaleShakeAnim = GetComponent<ScaleShakeAnim>();
         _mutetButton.onClick.AddListener(OnClick);
 	}
 
 	private void OnClick()
 	{
+        _scaleShakeAnim.Play();
         OnClickAction?.Invoke();
 	}
 

@@ -4,20 +4,26 @@ using UnityEngine.UI;
 using System;
 using EventBus;
 
+[RequireComponent(typeof(RotateAnim))]
+[RequireComponent(typeof(Button))]
 public class RestartButtonView : MonoBehaviour
 {
 
-	[SerializeField] private Button _restartButton;
+	private Button _restartButton;
+	private RotateAnim _rotateAnim;
 	public Action OnRestartButtonAction;
 
 	private void Awake()
-	{        
-		_restartButton.onClick.AddListener(OnRestart);
+	{
+        _restartButton = GetComponent<Button>();
+        _rotateAnim = GetComponent<RotateAnim>();
+        _restartButton.onClick.AddListener(OnRestart);
 	}
 
 	private void OnRestart()
 	{
-		OnRestartButtonAction?.Invoke();
+        _rotateAnim.Play();
+        OnRestartButtonAction?.Invoke();
 	}
 
 	public void HideView()
@@ -37,8 +43,9 @@ public class RestartButtonViewService : IService
 	[Inject] private IViewFabric _viewFabric;
 	private RestartButtonView _RestartButtonView;
     [Inject] private IMarkerService _markerService;
-	
-	public void ActivateService()
+    [Inject] private IAudioService _audioService;
+
+    public void ActivateService()
 	{       
 		Transform parent = _markerService.GetMarker<GameCanvasMarker>().transform;
         _RestartButtonView = _viewFabric.Init<RestartButtonView>(parent);
@@ -48,6 +55,7 @@ public class RestartButtonViewService : IService
 
     public void OnrestartButton()
     {
+		_audioService.PlayAudio(AudioEnum.Restart, false);
         EventBus<OnRestartButton>.Raise();
     }
 
