@@ -7,6 +7,8 @@ public interface IAudioDataManager
     public AudioClip GetAudioSOData(AudioEnum audioName);
     public AudioSLData GetAudioSLData();
     public void SetAudioSLData(AudioSLData audioSLData);
+    public void SetMute();
+    public void SetMax();
 }
 
 
@@ -23,6 +25,20 @@ public class AudioDataManager : IAudioDataManager
         _storageService = sOStorageService;
         _audioSOData = (AudioSOData)_storageService.GetSOByType<AudioSOData>();
         LoadAudioData();
+    }
+
+    public void SetMute()
+    {
+        _audioSLData.MusicValue = 0;
+        _audioSLData.SoundValue = 0;
+        SaveLoader.SaveItem<AudioSLData>(_audioSLData, AudioKey);
+    }
+
+    public void SetMax()
+    {
+        _audioSLData.MusicValue = 1;
+        _audioSLData.SoundValue = 1;
+        SaveLoader.SaveItem<AudioSLData>(_audioSLData, AudioKey);
     }
 
     public AudioClip GetAudioSOData(AudioEnum audioName) => _audioSOData.audioDictionary[audioName];
@@ -44,6 +60,6 @@ public class AudioDataManager : IAudioDataManager
 
 public class AudioSLData
 {
-    public float MusicValue;
-    public float SoundValue;
+    public float MusicValue = 1;
+    public float SoundValue = 1;
 }

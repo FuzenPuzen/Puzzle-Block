@@ -21,7 +21,7 @@ public class AudioService : IAudioService
 		_audioUnitPoolViewService = _poolsViewService.GetPool<AudioUnitViewService>();
     }
 
-	public AudioUnitViewService PlayAudio(AudioEnum name, bool isLoop)
+	public AudioUnitViewService PlayAudio(AudioEnum name, bool isLoop = false)
 	{
 		AudioUnitViewService audio = (AudioUnitViewService)_audioUnitPoolViewService.GetItem<AudioUnitViewService>();
 		audio.Play(new StartValues() {Clip = _audioDataManager.GetAudioSOData(name), IsLoopClip = isLoop });

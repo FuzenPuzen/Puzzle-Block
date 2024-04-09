@@ -12,6 +12,7 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Vector3 _shapeStartScale;
     private float _multiDrag;
     public Action ShapePlaced;
+    public Action OnTake;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        OnTake.Invoke();
         _shape.transform.localScale = Vector3.one;
         _startPosition = _rectTransform.anchoredPosition;
         _rectTransform.anchoredPosition += new Vector2(0, 150);
@@ -35,7 +37,6 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnDrag(PointerEventData eventData)
     {
         _rectTransform.anchoredPosition += eventData.delta * _multiDrag;
-        //transform.Translate(eventData.delta);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -59,7 +60,7 @@ public class ShapeView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
 
         ShapePlaced.Invoke();
-        Destroy(gameObject); // временно
+        Destroy(gameObject);
     }
 }
 
@@ -68,6 +69,7 @@ public class ShapeViewService : IService
     [Inject] private IViewFabric _viewfabric;
     private ShapeView _shapeView;
     [Inject] private IMarkerService _markerService;
+    [Inject] private IAudioService _audioService;
     [Inject] private GameCanvasViewService _gameCanvasViewService;
     public ShapeData ShapeData;
 
@@ -77,6 +79,7 @@ public class ShapeViewService : IService
         Transform parent = _markerService.GetMarker<ShapePlaceMarker>().transform;
         _shapeView = _viewfabric.Init<ShapeView>(ShapeData.Prefab, parent);
         _shapeView.ShapePlaced += OnShapePlaced;
+        _shapeView.OnTake += OnShapeTake;
         _shapeView.SetMultiDrag(CalculateMultiDrag());
     }
 
@@ -86,8 +89,14 @@ public class ShapeViewService : IService
         return _canvas.GetComponent<RectTransform>().rect.width / Screen.width;
     }
 
+    public void OnShapeTake()
+    {
+        _audioService.PlayAudio(AudioEnum.Puk, false);
+    }
+
     public void OnShapePlaced()
     {
+        _audioService.PlayAudio(AudioEnum.Put, false);
         EventBus<OnShapePlaced>.Raise(new OnShapePlaced { shapeViewService = this });
     }
 

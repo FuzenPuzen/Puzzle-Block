@@ -12,6 +12,7 @@ public class StartState : IBaseState
     [Inject] private LoosePanelViewService _loosePanelViewService;
     [Inject] private RestartPanelViewService _restartPanelViewService;
     [Inject] private RestartButtonViewService _restartButtonViewService;
+    [Inject] private MuteButtonViewService _muteButtonViewService;
 
     [Inject] private TutorialViewService _tutorialViewService;
     [Inject] private RecordPanelViewService _recordPanelViewService;
@@ -25,11 +26,12 @@ public class StartState : IBaseState
         _shapeSpawnPlaceService.ActivateService();
         _shapeSpawnService.ActivateService();
         _fieldCheckService.ActivateService();
-        _scorePanelViewService.ActivateService();
 
+        _scorePanelViewService.ActivateService();
         _loosePanelViewService.ActivateService();
         _restartPanelViewService.ActivateService();
         _restartButtonViewService.ActivateService();
+        _muteButtonViewService.ActivateService();
 
         _tutorialViewService.ActivateService();
         _recordPanelViewService.ActivateService();
