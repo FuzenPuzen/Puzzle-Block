@@ -4,14 +4,25 @@ public class YSaveService
 {
     public YSaveService()
     {
-        //YandexGame.LoadProgress();
+        YandexGame.LoadCloud();
     }
 
     public void SaveRecord(RecordData item)
     {
-        YandexGame.savesData.RecordData = item;
-        YandexGame.SaveProgress();
+#if !UNITY_EDITOR
+        YandexGame.savesData.RecordData = item.Record;
+        YandexGame.SaveCloud();
+#endif
     }
 
-    public RecordData LoadRecord() => YandexGame.savesData.RecordData;
+    public RecordData LoadRecord()
+    {
+
+        RecordData temp = new RecordData();
+#if !UNITY_EDITOR
+        temp.Record = YandexGame.savesData.RecordData;
+        return temp;
+#endif
+        return temp;
+    }
 }

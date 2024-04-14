@@ -4,11 +4,6 @@ using Zenject;
 
 public class RecordData
 {
-    public RecordData()
-    {
-        Record = 0;
-    }
-
     public int Record;
 }
 
@@ -20,8 +15,8 @@ public interface IRecordDataManager : IService
 
 public class RecordDataManager : IRecordDataManager
 {
-    private RecordData _recordData = new();
-    [Inject] private YSaveService _YSaveService = new();
+    private RecordData _recordData;
+    [Inject] private YSaveService _YSaveService;
     private EventBinding<ScoreChanged> _scoreChanged;
     private const string RecordKey = "RecordKey";
 

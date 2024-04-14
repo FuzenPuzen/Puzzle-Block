@@ -36,14 +36,14 @@ public class TutorialViewService : IService
 
     public void ActivateService()
 	{
-		if (PlayerPrefs.HasKey(key))
+		/*if (PlayerPrefs.HasKey(key))
             _isTutorial = PlayerPrefs.GetInt(key);
         if (_isTutorial == 1)
 		{
 			Transform parent = _markerService.GetMarker<GameCanvasMarker>().transform;
 			_tutorialView = _viewFabric.Init<TutorialView>(parent);
 			PlayerPrefs.SetInt(key, 0);
-        }
+        }*/
 	}
 	
 	public void HideView()

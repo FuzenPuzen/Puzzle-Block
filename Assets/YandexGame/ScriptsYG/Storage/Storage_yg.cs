@@ -118,11 +118,11 @@ namespace YG
         public static Action onResetProgress;
         public void _ResetSaveProgress()
         {
-            Message("Reset Save Progress");
+            /*Message("Reset Save Progress");
             int idSave = savesData.idSave;
             savesData = new SavesYG { idSave = idSave, isFirstSession = false };
             onResetProgress?.Invoke();
-            GetDataInvoke();
+            GetDataInvoke();*/
         }
         public static void ResetSaveProgress() => Instance._ResetSaveProgress();
 

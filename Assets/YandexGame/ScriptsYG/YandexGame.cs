@@ -145,12 +145,13 @@ namespace YG
         }
 
         private static bool firstSceneLoad = true;
+
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (firstSceneLoad)
+            /*if (firstSceneLoad)
                 firstSceneLoad = false;
             else if (infoYG.AdWhenLoadingScene)
-                _FullscreenShow();
+                _FullscreenShow();*/
         }  
 
         #region For ECS
