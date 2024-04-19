@@ -1,4 +1,6 @@
 using EventBus;
+using System.Diagnostics;
+using UnityEngine;
 using Zenject;
 
 public class GameState : IBaseState
@@ -11,16 +13,28 @@ public class GameState : IBaseState
 
     public void Enter()
     {
-        _onLoose = new(OnLoose);
-        _onRestart = new(OnLoose);
-        _onRestartButton = new(OnRestartButton);
+        if (_onLoose == null)
+        {
+            _onLoose = new(OnLoose);
+            _onRestart = new(OnRestart);
+            _onRestartButton = new(OnRestartButton);
+        }
+        _onLoose.Add(OnLoose);
+        _onRestart.Add(OnRestart);
+        _onRestartButton.Add(OnRestartButton);
     }
 
     public void Exit()
     {
         _onLoose.Remove(OnLoose);
-        _onRestart.Remove(OnLoose);
+        _onRestart.Remove(OnRestart);
         _onRestartButton.Remove(OnRestartButton);
+    }
+
+    public void OnRestart()
+    {
+        _restartPanelViewService.HideView();
+        _stateMachine.SetState<RestartState>();
     }
 
     public void OnLoose()

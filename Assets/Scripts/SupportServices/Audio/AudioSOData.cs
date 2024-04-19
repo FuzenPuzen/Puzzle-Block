@@ -12,7 +12,7 @@ public class AudioSOData : SerializedScriptableObject
     public Dictionary<AudioEnum, AudioClip> audioDictionary = new Dictionary<AudioEnum, AudioClip>();
 
 
-   /* [Button]
+    /*[Button]
     // Метод для заполнения словаря звуков
     public void FillAudioDictionary()
     {

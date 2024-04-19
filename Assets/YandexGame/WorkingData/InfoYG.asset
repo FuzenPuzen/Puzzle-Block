@@ -22,7 +22,7 @@ MonoBehaviour:
     name: Player this
     uniqueID: 000
     photo: https://justplaygames.ru/public/icon_player.png
-  AdWhenLoadingScene: 1
+  AdWhenLoadingScene: 0
   showFirstAd: 1
   rewardedAfterClosing: 1
   adDisplayCalls: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   saveCloud: 1
   flush: 1
   localSaveSync: 1
-  saveCloudInterval: 1
+  saveCloudInterval: 0
   saveOnQuitGame: 1
   quitGameParameters:
     objectName: YandexGame

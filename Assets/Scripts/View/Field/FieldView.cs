@@ -34,6 +34,16 @@ public class FieldViewService : IService
             }
 	}
 
+	public void ClearField()
+	{
+        for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; j++)
+            {
+                _fieldPoints[i, j].Clear();
+            }
+
+    }
+
     public void ClearRow(int i)
     {
         for (int j = 0; j < 10; j++)

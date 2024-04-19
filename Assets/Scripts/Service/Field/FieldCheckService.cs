@@ -11,6 +11,7 @@ public class FieldCheckService : IService
     [Inject] private FieldViewService _fieldViewService;
     [Inject] private IScoreDataManager _scoreDataManager;
     private EventBinding<OnShapePlaced> _shapePlaced;
+    [Inject] private IAudioService _audioService;
 
     private DropZoneView[,] _fieldPoints;
     private List<ShapeViewService> _shapeViewServices;
@@ -76,6 +77,7 @@ public class FieldCheckService : IService
 
     public void CheckFullLines()
     {
+        bool isPlaySound = false;
         int[] rowSum = new int[10];
         int[] columnSum = new int[10];
 
@@ -92,6 +94,7 @@ public class FieldCheckService : IService
         {
             if (rowSum[i] == 10)
             {
+                isPlaySound = true;
                 _scoreDataManager.AddLineScore();
                 ClearRow(i);
             }
@@ -101,10 +104,14 @@ public class FieldCheckService : IService
         {
             if (columnSum[j] == 10)
             {
+                isPlaySound = true;
                 _scoreDataManager.AddLineScore();
                 ClearColumn(j);
             }
         }
+
+        if (isPlaySound)
+            _audioService.PlayAudio(AudioEnum.Line, false);
     }
 
     public void ClearRow(int i)

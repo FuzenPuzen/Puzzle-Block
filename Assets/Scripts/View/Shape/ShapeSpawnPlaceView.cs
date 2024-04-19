@@ -3,7 +3,11 @@ using Zenject;
 
 public class ShapeSpawnPlaceView : MonoBehaviour
 {
-	
+    public void Clear()
+    {
+		for (int i = 0; i < transform.childCount; i++)
+			Destroy(transform.GetChild(i).gameObject);
+    }
 }
 
 public class ShapeSpawnPlaceViewService : IService
@@ -17,4 +21,10 @@ public class ShapeSpawnPlaceViewService : IService
 		Transform parent = _markerService.GetMarker<GameCanvasMarker>().transform;
         _shapeSpawnView = _viewfabric.Init<ShapeSpawnPlaceView>(parent);
 	}
+
+	public void Clear()
+	{
+        _shapeSpawnView.Clear();
+
+    }
 }

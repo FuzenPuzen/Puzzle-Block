@@ -36,8 +36,8 @@ public class AudioDataManager : IAudioDataManager
 
     public void SetMax()
     {
-        _audioSLData.MusicValue = 1;
-        _audioSLData.SoundValue = 1;
+        _audioSLData.MusicValue = 0.8f;
+        _audioSLData.SoundValue = 0.8f;
         SaveLoader.SaveItem<AudioSLData>(_audioSLData, AudioKey);
     }
 
@@ -46,8 +46,8 @@ public class AudioDataManager : IAudioDataManager
     public void SetAudioSLData(AudioSLData audioSLData)
     {
         _audioSLData = audioSLData;
-        _audioSLData.MusicValue = Math.Clamp(_audioSLData.MusicValue, 0, 1);
-        _audioSLData.SoundValue = Math.Clamp(_audioSLData.SoundValue, 0, 1);
+        _audioSLData.MusicValue = Math.Clamp(_audioSLData.MusicValue, 0, 0.8f);
+        _audioSLData.SoundValue = Math.Clamp(_audioSLData.SoundValue, 0, 0.8f);
         SaveLoader.SaveItem<AudioSLData>(_audioSLData, AudioKey);
     }
 

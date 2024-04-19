@@ -4,23 +4,17 @@ using Zenject;
 
 public class LooseState : IBaseState
 {
+    [Inject] private StateMachine _stateMachine;
     [Inject] private LoosePanelViewService _loosePanelViewService;
     [Inject] private FieldCheckService _fieldCheckService;
     [Inject] private ShapeSpawnService _shapeSpawnService;
     [Inject] private ScorePanelViewService _scorePanelViewService;
     [Inject] private RecordPanelViewService _recordPanelViewService;
-    [Inject] private YADService _yADService;
     [Inject] private IRecordDataManager _recordDataManager;
     private EventBinding<OnRestart> _onRestart;
 
     public void Enter()
     {
-        _fieldCheckService.DeactivateService();
-        _shapeSpawnService.DeactivateService();
-        _scorePanelViewService.DeactivateService();
-        _recordPanelViewService.DeactivateService();
-        _recordDataManager.DeactivateService();
-        _yADService.ShowAD();
         _loosePanelViewService.ShowView();
         _onRestart = new(OnRestartButton);
     }
@@ -32,7 +26,8 @@ public class LooseState : IBaseState
 
     public void OnRestartButton()
     {
+        _loosePanelViewService.HideView();
         _onRestart.Remove(OnRestartButton);
-        SceneManager.LoadScene(0);
+        _stateMachine.SetState<RestartState>();
     }
 }

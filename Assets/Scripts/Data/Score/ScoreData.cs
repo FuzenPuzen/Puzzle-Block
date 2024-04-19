@@ -8,6 +8,7 @@ public class ScoreData
 public interface IScoreDataManager : IService
 {
     public void AddLineScore();
+    public void ClearScore();
 }
 
 public class ScoreDataManager : IScoreDataManager
@@ -22,6 +23,12 @@ public class ScoreDataManager : IScoreDataManager
     public void AddLineScore()
     {
         _scoreData.Score += 10;
+        EventBus<ScoreChanged>.Raise(new ScoreChanged { score = _scoreData.Score });
+    }
+
+    public void ClearScore()
+    {
+        _scoreData.Score = 0;
         EventBus<ScoreChanged>.Raise(new ScoreChanged { score = _scoreData.Score });
     }
 }

@@ -57,6 +57,8 @@ public class MuteButtonViewService : IService
 		_muteButtonView.OnMuteButtonAction = OnMuteAction;
         _muteButtonView.OnUnMuteButtonAction = UnMuteAction;
         _muteButtonView.SetUnMute();
+		if(_audioDataManager.GetAudioSLData().SoundValue == 0)
+            _muteButtonView.SetMute();
     }
 
 	public void OnMuteAction()

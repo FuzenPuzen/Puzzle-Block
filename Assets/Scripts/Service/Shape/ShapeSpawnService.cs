@@ -31,7 +31,7 @@ public class ShapeSpawnService : IShapeSpawnService
         _shapePlaced.Remove(ShapeCounter);
     }
 
-    private void SpawnShapes()
+    public void SpawnShapes()
 	{
         _shapeViewServices?.Clear();
         int randomId;
@@ -41,7 +41,6 @@ public class ShapeSpawnService : IShapeSpawnService
             randomId = Random.Range(0, _shapesData.ShapeDictionary.Count);
             shapeData = _shapesData.ShapeDictionary[randomId];
 
-            //if (i == 0)
                 while (!_shapeCheckService.CheckFieldSpace(shapeData))
                 {
                     randomId = Random.Range(0, _shapesData.ShapeDictionary.Count);

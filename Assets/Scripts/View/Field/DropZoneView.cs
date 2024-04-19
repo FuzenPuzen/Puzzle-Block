@@ -42,10 +42,18 @@ public class DropZoneView : MonoBehaviour
         return true;
     }
 
+    public void Clear()
+    {
+        if (transform.childCount > 0)
+            transform.GetChild(0).GetComponent<PieceView>().Disable(0);
+    }
+
+
     public void Liberate(int i)
     {
-        if(transform.GetChild(0) != null)
+        if (transform.childCount > 0)
             transform.GetChild(0).GetComponent<PieceView>().Disable(i);
+        Recolor(Color.white);
     }
     //Ќазвание метода шутка и отсылка к helldivers 2.
     //ѕравильное название должно быть что-то типо "Release"
